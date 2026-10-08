@@ -35,7 +35,6 @@ function renderProducts(): void {
 }
 
 function renderCart(): void {
-  const isEmpty = cart.count === 0;
   cartCount.textContent = String(cart.count);
   cartTotal.textContent = formatPrice(cart.totalCents);
   cartEmpty.hidden = cart.count > 0;
