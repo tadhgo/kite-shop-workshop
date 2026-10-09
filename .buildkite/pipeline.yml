@@ -4,15 +4,11 @@ steps:
       - ".buildkite/scripts/install.sh"
       - "npm run lint -w web"
 
-  - wait
-
   - label: ":jest: Unit"
     command:
       - ".buildkite/scripts/install.sh"
       - "npm test -w web"
     soft_fail: true
-
-  - wait
 
   - label: ":bust_in_silhouette: Account"
     command:
@@ -20,14 +16,10 @@ steps:
       - "npm run lint -w account"
       - "npm test -w account"
 
-  - wait
-
   - label: ":package: Build"
     command:
       - ".buildkite/scripts/install.sh"
       - "npm run build -w web"
-
-  - wait
 
   - label: ":playwright: E2E"
     command:
