@@ -17,11 +17,13 @@ steps:
       - "npm test -w account"
 
   - label: ":package: Build"
+    key: build
     command:
       - ".buildkite/scripts/install.sh"
       - "npm run build -w web"
 
   - label: ":playwright: E2E"
+    depends_on: build
     command:
       - ".buildkite/scripts/install.sh"
       - "npx playwright install --with-deps chromium"
