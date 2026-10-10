@@ -47,5 +47,5 @@ steps:
 
   - label: ":rocket: Deploy"
     command: "bash .buildkite/scripts/deploy.sh"
-    env:
-      DEPLOY_KEY: "kite_deploy_not_a_real_key_123"
+    secrets:
+      - DEPLOY_KEY
