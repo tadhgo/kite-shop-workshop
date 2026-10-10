@@ -24,7 +24,6 @@ steps:
   - label: ":playwright: E2E"
     command:
       - ".buildkite/scripts/install.sh"
-      - "npm run build -w web"
       - "npx playwright install --with-deps chromium"
       - "npm run e2e -w web"
 
