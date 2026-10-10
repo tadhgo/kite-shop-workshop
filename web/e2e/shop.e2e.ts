@@ -4,6 +4,7 @@ test.beforeEach(async ({ page }) => {
   await page.goto("/");
 });
 
+// The shop page lists every kite we sell.
 test("shows the kite catalog", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Kites" })).toBeVisible();
   await expect(page.getByTestId("product")).toHaveCount(6);
