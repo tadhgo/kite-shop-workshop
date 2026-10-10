@@ -1,10 +1,12 @@
 steps:
   - label: ":eslint: Lint"
+    if_changed: ["web/**", "*.{json,mjs,cjs}", ".buildkite/**"]
     command:
       - ".buildkite/scripts/install.sh"
       - "npm run lint -w web"
 
   - label: ":jest: Unit"
+    if_changed: ["web/**", "*.{json,mjs,cjs}", ".buildkite/**"]
     parallelism: 4
     command:
       - ".buildkite/scripts/install.sh"
@@ -16,12 +18,14 @@ steps:
           test-file-pattern: "web/tests/**/*.test.ts"
 
   - label: ":bust_in_silhouette: Account"
+    if_changed: ["account/**", "*.{json,mjs,cjs}", ".buildkite/**"]
     command:
       - ".buildkite/scripts/install.sh"
       - "npm run lint -w account"
       - "npm test -w account"
 
   - label: ":package: Build"
+    if_changed: ["web/src/**", "*.{json,mjs,cjs}", ".buildkite/**"]
     key: build
     command:
       - ".buildkite/scripts/install.sh"
@@ -29,6 +33,7 @@ steps:
     artifact_paths: "web/dist/**/*"
 
   - label: ":playwright: E2E"
+    if_changed: ["web/**", "*.{json,mjs,cjs}", ".buildkite/**"]
     depends_on: build
     command:
       - ".buildkite/scripts/install.sh"
