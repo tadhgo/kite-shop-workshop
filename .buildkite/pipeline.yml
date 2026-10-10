@@ -45,7 +45,10 @@ steps:
 
   - wait
 
-  - label: ":rocket: Deploy"
-    command: "bash .buildkite/scripts/deploy.sh"
-    secrets:
-      - DEPLOY_KEY
+  - group: ":rocket: Deploy"
+    if: build.branch == "main"
+    steps:
+      - label: ":rocket: Deploy"
+        command: "bash .buildkite/scripts/deploy.sh"
+        secrets:
+          - DEPLOY_KEY
