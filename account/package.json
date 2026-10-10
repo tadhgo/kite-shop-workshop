@@ -1,6 +1,7 @@
 {
   "name": "account",
   "version": "0.1.0",
+  "description": "Account checks: login form and profile helpers",
   "private": true,
   "scripts": {
     "lint": "eslint . && tsc -p tsconfig.json",
