@@ -37,6 +37,7 @@ steps:
           - "npm run e2e -w web"
 
   - label: ":bust_in_silhouette: Account"
+    key: account
     if_changed: ["account/**", "*.{json,mjs,cjs}", ".buildkite/**"]
     command:
       - ".buildkite/scripts/install.sh"
@@ -48,7 +49,13 @@ steps:
   - group: ":rocket: Deploy"
     if: build.branch == "main"
     steps:
+      - block: ":rocket: Deploy to production?"
+        key: approve-deploy
+
       - label: ":rocket: Deploy"
+        depends_on: [web, account, approve-deploy]
+        concurrency: 1
+        concurrency_group: "workshop-tadhg/deploy"
         command: "bash .buildkite/scripts/deploy.sh"
         secrets:
           - DEPLOY_KEY

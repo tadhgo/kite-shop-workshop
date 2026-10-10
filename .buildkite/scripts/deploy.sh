@@ -8,5 +8,5 @@ fi
 
 echo "Deploying the Kite Shop to production"
 echo "Deploying with key ${DEPLOY_KEY}"
-sleep 5
+sleep 30
 echo "Deployed"
