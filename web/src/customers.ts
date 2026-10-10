@@ -34,8 +34,9 @@ export class CustomerDirectory {
   findByLastName(lastName: string): Customer[] {
     const result = this.db.exec(
       "SELECT id, first_name, last_name, email FROM customers " +
-        "WHERE lower(last_name) = lower('" + lastName + "') " +
+        "WHERE lower(last_name) = lower(?) " +
         "ORDER BY first_name",
+      [lastName],
     );
     if (result.length === 0) {
       return [];
