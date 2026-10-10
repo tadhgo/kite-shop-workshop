@@ -5,6 +5,7 @@ steps:
       - "npm run lint -w web"
 
   - label: ":jest: Unit"
+    parallelism: 4
     command:
       - ".buildkite/scripts/install.sh"
       - "bktec run"
