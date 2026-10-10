@@ -13,7 +13,8 @@ steps:
           test-runner: jest
           result-path: jest-results.json
           test-file-pattern: "web/tests/**/*.test.ts"
-    soft_fail: true
+    retry:
+      automatic: true
 
   - label: ":bust_in_silhouette: Account"
     command:
