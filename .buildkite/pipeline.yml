@@ -21,12 +21,16 @@ steps:
     command:
       - ".buildkite/scripts/install.sh"
       - "npm run build -w web"
+    artifact_paths: "web/dist/**/*"
 
   - label: ":playwright: E2E"
     depends_on: build
     command:
       - ".buildkite/scripts/install.sh"
-      - "npx playwright install --with-deps chromium"
+      - "buildkite-agent artifact download 'web/dist/**' ."
+      - "npx playwright install-deps chromium"
+      - "npx playwright install chromium"
+      - "echo '--- :playwright: Run E2E'"
       - "npm run e2e -w web"
 
   - wait
