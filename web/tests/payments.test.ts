@@ -23,10 +23,10 @@ describe("payment client", () => {
 
   test("retries a failed charge", async () => {
     const gateway = gatewayThatFails(5);
-    const client = new PaymentClient(gateway);
+    const client = new PaymentClient(gateway, { baseDelayMs: 1 });
     await expect(client.charge(4900)).resolves.toEqual({ id: "ch_6", amountCents: 4900 });
     expect(gateway.calls).toBe(6);
-  }, 40_000);
+  });
 
   test("gives up after the last attempt", async () => {
     const gateway = gatewayThatFails(1);
